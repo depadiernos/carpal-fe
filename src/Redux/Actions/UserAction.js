@@ -6,8 +6,15 @@ export const SET_USER = "SET_USER";
 export const SET_EDITING = "SET_EDITING";
 export const SET_PROFILE_UPDATE = "SET_PROFILE_UPDATE";
 export const SET_FAVORITE_LOCATION = "SET_FAVORITE_LOCATION";
+export const ADD_LOCATION = "ADD_LOCATION";
 
-export function SignUpAction(user) {
+export const DELETE_LOCATION = "DELETE_LOCATION";
+export const EDIT_LOCATION = "EDIT_LOCATION"
+
+export const CANCEL_RIDE_REQUEST = "CANCEL_RIDE_REQUEST";
+
+
+export function SignUpAction(user, props) {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
         api()
@@ -16,7 +23,7 @@ export function SignUpAction(user) {
                 dispatch({ type: REQUEST_SUCCESS });
                 localStorage.setItem("token", res.data.token);
                 dispatch({ type: SET_USER, payload: res.data });
-                // props.history.push("/dashboard");
+                props.history.push("/profilepage");
             })
             .catch((err) => {
                 dispatch({ type: REQUEST_ERROR, payload: err });
@@ -24,7 +31,7 @@ export function SignUpAction(user) {
     };
 }
 
-export function LogInAction(user) {
+export function LogInAction(user, props) {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
         api()
@@ -33,7 +40,7 @@ export function LogInAction(user) {
                 dispatch({ type: REQUEST_SUCCESS });
                 localStorage.setItem("token", res.data.token);
                 dispatch({ type: SET_USER, payload: res.data });
-                // props.props.history.push("/dashboard");
+                props.history.push("/profilepage");
             })
             .catch((err) => {
                 dispatch({ type: REQUEST_ERROR, payload: err });
@@ -93,4 +100,48 @@ export function setFavoriteLocation(payload) {
                 });
             });
     };
+}
+
+export function AddSavedLocation(payload) {
+    return (dispatch) => {
+
+        dispatch({ type: ADD_LOCATION, payload })
+        // add a second dispatch to post to ride table
+    }
+    //hit the api endpoint here to hit locations table and ride table
+
+}
+export function CancelRideRequest(id) {
+    return (dispatch) => {
+        dispatch({ type: REQUEST_START });
+        api()
+            .delete(`/request/${id}`)
+            .then((res) => {
+                dispatch({ type: REQUEST_SUCCESS });
+            })
+            .catch((error) => {
+                dispatch({
+                    type: REQUEST_ERROR
+                });
+            });
+    };
+
+}
+
+
+export function DeleteLocation(id) {
+    return (dispatch) => {
+        dispatch(
+            { type: DELETE_LOCATION, payload: id }
+        )
+        //instead of delete --> remove: change status pending/accepted
+    }
+}
+
+export function EditLocation(id, payload) {
+    return (dispatch) => {
+        dispatch({
+            type: EDIT_LOCATION, payload
+        })
+    }
 }
