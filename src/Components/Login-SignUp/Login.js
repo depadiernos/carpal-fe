@@ -9,6 +9,7 @@ import LabelField from "../Form-Components/LabelField";
 import { LogInAction } from "../../Redux/Actions/UserAction";
 
 function Login(props) {
+    console.log("props:", props);
     const { errors, touched } = props;
 
     return (
