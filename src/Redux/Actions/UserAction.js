@@ -9,10 +9,13 @@ export const SET_FAVORITE_LOCATION = "SET_FAVORITE_LOCATION";
 export const ADD_LOCATION = "ADD_LOCATION";
 
 export const DELETE_LOCATION = "DELETE_LOCATION";
-export const EDIT_LOCATION = "EDIT_LOCATION"
+export const EDIT_LOCATION = "EDIT_LOCATION";
 
 export const CANCEL_RIDE_REQUEST = "CANCEL_RIDE_REQUEST";
 
+export const UPLOAD_PROFILE_IMG_START = "UPLOAD_START";
+export const UPLOAD_PROFILE_IMG_SUCCESS = "UPLOAD_SUCCESS";
+export const UPLOAD_PROFILE_IMG_ERROR = "UPLOAD_ERROR";
 
 export function SignUpAction(user, props) {
     return (dispatch) => {
@@ -104,12 +107,10 @@ export function setFavoriteLocation(payload) {
 
 export function AddSavedLocation(payload) {
     return (dispatch) => {
-
-        dispatch({ type: ADD_LOCATION, payload })
+        dispatch({ type: ADD_LOCATION, payload });
         // add a second dispatch to post to ride table
-    }
+    };
     //hit the api endpoint here to hit locations table and ride table
-
 }
 export function CancelRideRequest(id) {
     return (dispatch) => {
@@ -125,23 +126,37 @@ export function CancelRideRequest(id) {
                 });
             });
     };
-
 }
-
 
 export function DeleteLocation(id) {
     return (dispatch) => {
-        dispatch(
-            { type: DELETE_LOCATION, payload: id }
-        )
+        dispatch({ type: DELETE_LOCATION, payload: id });
         //instead of delete --> remove: change status pending/accepted
-    }
+    };
 }
 
 export function EditLocation(id, payload) {
     return (dispatch) => {
         dispatch({
-            type: EDIT_LOCATION, payload
-        })
-    }
+            type: EDIT_LOCATION,
+            payload
+        });
+    };
 }
+
+//image redux
+// export function ImgUploadAction(props) {
+//     return (dispatch) => {
+//         dispatch({ type: UPLOAD_PROFILE_IMG_START });
+//         api()
+//             .post("/profile/profile-img-upload")
+//             .then((res) => {
+//                 dispatch({ type: UPLOAD_PROFILE_IMG_SUCCESS });
+//                 localStorage.setItem("token", res.data.token);
+//                 props.history.push("/profilepage");
+//             })
+//             .catch((err) => {
+//                 dispatch({ type: UPLOAD_PROFILE_IMG_ERROR });
+//             });
+//     };
+// }

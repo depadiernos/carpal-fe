@@ -8,7 +8,10 @@ import {
     SET_FAVORITE_LOCATION,
     ADD_LOCATION,
     DELETE_LOCATION,
-    EDIT_LOCATION
+    EDIT_LOCATION,
+    UPLOAD_PROFILE_IMG_START,
+    UPLOAD_PROFILE_IMG_SUCCESS,
+    UPLOAD_PROFILE_IMG_ERROR
 } from "../Actions/UserAction";
 
 const initialState = {
@@ -30,21 +33,22 @@ const initialState = {
             }
         ],
 
-        rides: [{
-            id: 1,
-            name: 'Path to Work',
-            status: 'pending'
-        },
-        {
-            id: 2,
-            name: 'Grocery Run',
-            status: 'accepted'
-        },
-        {
-            id: 3,
-            name: 'Liquor store',
-            status: 'saved',
-        }
+        rides: [
+            {
+                id: 1,
+                name: "Path to Work",
+                status: "pending"
+            },
+            {
+                id: 2,
+                name: "Grocery Run",
+                status: "accepted"
+            },
+            {
+                id: 3,
+                name: "Liquor store",
+                status: "saved"
+            }
         ],
         incoming_ride_requests: [
             {
@@ -126,8 +130,7 @@ export function UserReducer(state = initialState, action) {
                 user: {
                     ...state.user,
 
-                    rides: [...state.user.rides, action.payload
-                    ]
+                    rides: [...state.user.rides, action.payload]
                 }
             };
         case EDIT_LOCATION:
@@ -135,9 +138,7 @@ export function UserReducer(state = initialState, action) {
                 ...state,
                 user: {
                     ...state.user,
-                    rides: [...state.user.rides, action.payload
-                    ]
-
+                    rides: [...state.user.rides, action.payload]
                 }
             };
 
@@ -146,9 +147,30 @@ export function UserReducer(state = initialState, action) {
                 ...state,
                 user: {
                     ...state.user,
-                    rides: [...state.user.rides].filter(ride => ride.id !== action.payload)
+                    rides: [...state.user.rides].filter(
+                        (ride) => ride.id !== action.payload
+                    )
                 }
             };
+            //img url upload
+        // case UPLOAD_PROFILE_IMG_START:
+        //     return {
+        //         ...state,
+        //         isLoading: true,
+        //         error: null
+        //     };
+        // case UPLOAD_PROFILE_IMG_SUCCESS:
+        //     return {
+        //         ...state,
+        //         isLoading: false,
+        //         error: null
+        //     };
+        // case UPLOAD_PROFILE_IMG_ERROR:
+        //     return {
+        //         ...state,
+        //         isLoading: false,
+        //         error: action.payload
+        //     };
         // add ADD RIDE case
 
         default:
