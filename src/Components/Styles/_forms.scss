@@ -46,7 +46,7 @@ input:-webkit-autofill:focus {
     align-items: center;
     max-width: 800px;
     border-radius: 20px;
-    padding: 40px;
+    padding: 0px 40px;
     margin: 50px auto;
 }
 .field-above {
@@ -66,7 +66,8 @@ label {
 
 ////////////////// Form Error Msg
 .form-error {
-    color: $carpalGreen;
+    // color: $carpalGreen;
+    color: #E90513;
     font-family: inherit;
     font-size: 1.6rem;
     transition: all 0.3s;

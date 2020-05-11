@@ -1,17 +1,32 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { withFormik, Form, Field } from "formik";
+import { withFormik, Form } from "formik";
 import * as Yup from "yup";
 import "./Login.scss";
 import LabelField from "../Form-Components/LabelField";
+import cuties from "../../img/background/Cutie-Trio-Bckgrnd.png";
+import getGoogleRoute from "../../Utils/GoogleRoute";
 
 import { LogInAction } from "../../Redux/Actions/UserAction";
 
 function Login(props) {
     console.log("props:", props);
     const { errors, touched } = props;
-
+    useEffect(() => {
+        let token = document.cookie.replace(
+            /(?:(?:^|.*;\s*)auth\s*\=\s*([^;]*).*$)|^.*$/,
+            "$1"
+        );
+        if (token) {
+            localStorage.setItem("token", token);
+            //destroy auth cookie
+            document.cookie =
+                "auth=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            //push user to profile page
+            props.history.push("/profilepage");
+        }
+    }, [localStorage.getItem("token")]);
     return (
         <div className="login-container">
             {/* form container */}
@@ -42,10 +57,7 @@ function Login(props) {
                 )}
 
                 <button type="submit">Submit</button>
-                <a
-                    className="btn"
-                    href="https://staging-carpal.herokuapp.com/auth/google/testing"
-                >
+                <a className="btn" href={getGoogleRoute()}>
                     Login With Google
                 </a>
                 <Link className="forgot-password" to="/signup">
@@ -54,6 +66,8 @@ function Login(props) {
             </Form>
 
             <div className="module-nav">
+                <img className="module-cuties" src={cuties} alt="cuties" />
+
                 <p className="module-p">
                     New to the website?
                     <Link className="signup-link" to="/signup">

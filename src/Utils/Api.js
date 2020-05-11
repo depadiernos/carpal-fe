@@ -19,13 +19,13 @@ export default function () {
         });
     }
     if (process.env.NODE_ENV === "development") {
-        const url = "http://127.0.0.1:3001/";
-        return axiosInstance("development", url);
-    } else if (process.env.NODE_ENV === "production") {
-        const url = "https://carpal-production.herokuapp.com/";
-        return axiosInstance("production", url);
-    } else if (process.env.NODE_ENV === "staging") {
         const url = "https://staging-carpal.herokuapp.com/";
         return axiosInstance("development", url);
+    } else if (process.env.REACT_APP_IS_STAGING == 1) {
+        const url = "https://staging-carpal.herokuapp.com/";
+        return axiosInstance("staging", url);
+    } else if (process.env.REACT_APP_IS_STAGING == 0) {
+        const url = "https://carpal-production.herokuapp.com/";
+        return axiosInstance("production", url);
     }
 }
