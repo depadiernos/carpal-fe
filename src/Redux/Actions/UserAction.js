@@ -11,10 +11,13 @@ export const HANDLE_INCOMING_REQUESTS = "HANDLE_INCOMING_REQUESTS";
 export const HANDLE_OUTGOING_REQUESTS = "HANDLE_OUTGOING_REQUESTS";
 export const UPDATE_RIDE_REQUEST = "UPDATE_RIDE_REQUEST";
 
+<<<<<<< HEAD
 export const UPLOAD_PROFILE_IMG_START = "UPLOAD_START";
 export const UPLOAD_PROFILE_IMG_SUCCESS = "UPLOAD_SUCCESS";
 export const UPLOAD_PROFILE_IMG_ERROR = "UPLOAD_ERROR";
 
+=======
+>>>>>>> 34c6463ccbad53d410b6d10845ee562f39e6318a
 export function SignUpAction(user, props) {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
@@ -96,7 +99,6 @@ export function SetProfileUpdate(user) {
             });
     };
 }
-
 
 export function CancelRideRequest(payload) {
     return (dispatch) => {
