@@ -14,6 +14,7 @@ import SavedRide from "./Components/Rides/SavedRide/SavedRide";
 import RideRequests from "./Components/Rides/RideRequests/RideRequests";
 
 import "./App.scss";
+import RideInProgress from "./Components/Rides/RideInProgress/RideInProgress";
 
 //TODO: update app to include loader if isLoading
 
@@ -40,6 +41,7 @@ function App() {
                     path="/requests"
                     component={RideRequests}
                 />
+                <ProtectedRoute path="/route" component={RideInProgress} />
             </div>
             <Nav />
         </div>

@@ -7,6 +7,7 @@ import "./RideFind.scss";
 import RiderCard from "../RiderCard/RiderCard";
 import api from "./../../../Utils/Api";
 import AutoSuggest from "./../../AutoSuggest/AutoSuggest";
+import { currentRoute } from "../../../Redux/Actions/LocationActions";
 
 function RideFind(props) {
     //hold long and lat for both location
@@ -91,14 +92,18 @@ function RideFind(props) {
         ) {
             getRides({
                 start_location: {
-                    "long": suggestions.start_location_id[0],
-                    "lat": suggestions.start_location_id[1]
+                    long: suggestions.start_location_id[0],
+                    lat: suggestions.start_location_id[1]
                 },
                 end_location: {
-                    "long": suggestions.end_location_id[0],
-                    "lat": suggestions.end_location_id[1]
+                    long: suggestions.end_location_id[0],
+                    lat: suggestions.end_location_id[1]
                 }
             });
+            props.currentRoute(
+                suggestions.start_location_id,
+                suggestions.end_location_id
+            );
         }
     }, [suggestions.start_location_id, suggestions.end_location_id]);
 
@@ -205,4 +210,4 @@ function RideFind(props) {
     );
 }
 
-export default connect(null, {})(RideFind);
+export default connect(null, { currentRoute })(RideFind);
